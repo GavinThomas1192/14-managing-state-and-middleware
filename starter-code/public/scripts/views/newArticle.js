@@ -5,6 +5,7 @@ var app = app || {};
   const newArticle = {};
 
   // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  //This function hides everything and then shows a form that a user or admin can create a new article. When they click submit it calls newArticle.create and newArticle.submit which will eventually create a new instance of an article and also create a preview of the entry.
   newArticle.initNewArticlePage = function() {
     $('.tab-content').show();
     $('#export-field').hide();

@@ -8,7 +8,7 @@ const requestProxy = require('express-request-proxy'); // REVIEW: We've added a 
 const PORT = process.env.PORT || 3000;
 const app = express();
 // const conString = 'postgres://USERNAME:PASSWORD@HOST:PORT';
-const conString = ''; // TODO: Don't forget to set your own conString
+const conString = 'postgres://localhost:5432/kilovolt'; // DONE: Don't forget to set your own conString
 const client = new pg.Client(conString);
 client.connect();
 client.on('error', err => console.error(err));
@@ -20,8 +20,9 @@ app.use(express.static('./public'));
 
 // COMMENT: What is this function doing? Why do we need it? Where does it receive a request from?
 // (put your response in a comment here)
+//This function is a proxy that does an intial API request to https://github.com and using an authorization token.
 function proxyGitHub(request, response) {
-  console.log('Routing GitHub request for', request.params[0]);
+  console.log('Routing GitHub request for', request.params);
   (requestProxy({
     url: `https://api.github.com/${request.params[0]}`,
     headers: {Authorization: `token ${process.env.GITHUB_TOKEN}`}

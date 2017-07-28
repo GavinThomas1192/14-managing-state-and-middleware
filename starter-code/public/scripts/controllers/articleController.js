@@ -6,6 +6,7 @@ var app = app || {};
 
   // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
   // (put your response in a comment here)
+  //articleController is a funciton that calls articleView.index with an argument. articleView.index originates from articleView.js. It is used to populate and render the articles to the page and then calls two other functions, articleView.populateFilters();, articleView.handleFilters(); that populate the category and author filters..
   articleController.index = (ctx) => app.articleView.index(ctx.articles);
 
   // REVIEW: Middleware for grabbing one article by ID:
@@ -17,6 +18,7 @@ var app = app || {};
 
     // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
     // (put your response in a comment here)
+    //This is a function call that takes parameters. It originates from article.js and can be used for multiple population purposes.
     app.Article.findWhere('article_id', ctx.params.article_id, articleData);
   };
 
