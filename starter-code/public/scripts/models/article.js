@@ -14,12 +14,14 @@ var app = app || {};
   // REVIEW: With ES6 arrow functions, if the function only has one parameter, you don't need parentheses.
   //         This is similar to saying Article.loadAll = function(rows).
     // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+    //This is a functional programming function that takes in a parameter(data) and sort's by date. The array is then passed into .map that creates new Article Objects. The return array is then becomes Artile.all. Article.all will then be used as data for rendering purposes.
   Article.loadAll = rows => {
     rows.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)));
     Article.all = rows.map(ele => new Article(ele));
   };
 
   // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  //fetchAll is grabbing api data from our database and ".then" passes the data into our Article.loadAll function which sorts the data by date and then creates new Article Objects.
   Article.fetchAll = callback => {
     $.get('/articles')
     .then(
@@ -55,6 +57,7 @@ var app = app || {};
   };
 
   // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  //This function is using .map and .reduce to get the total number of words by authors. It is being called in Article.stats AND adminView.js
   Article.numWordsByAuthor = () => {
     return Article.allAuthors().map(author => {
       return {
@@ -75,6 +78,7 @@ var app = app || {};
   };
 
   // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  //This function is deleting all articles when a user or admin deletes an article so the app can then repopulate the database with updated article list.
   Article.truncateTable = callback => {
     $.ajax({
       url: '/articles',
